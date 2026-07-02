@@ -54,14 +54,11 @@ for cxx in builder.targets:
       'swhttprequest.cpp',
       'swgchooks.cpp',
       os.path.join(SM.sm_root, 'public', 'smsdk_ext.cpp'),
-      os.path.join(SM.sm_root, 'public', 'CDetour', 'detours.cpp'),
-      os.path.join(SM.sm_root, 'public', 'asm', 'asm.c'),
-      os.path.join(SM.sm_root, 'public', 'libudis86', 'decode.c'),
-      os.path.join(SM.sm_root, 'public', 'libudis86', 'itab.c'),
-      os.path.join(SM.sm_root, 'public', 'libudis86', 'syn-att.c'),
-      os.path.join(SM.sm_root, 'public', 'libudis86', 'syn-intel.c'),
-      os.path.join(SM.sm_root, 'public', 'libudis86', 'syn.c'),
-      os.path.join(SM.sm_root, 'public', 'libudis86', 'udis86.c'),
+      # Use the extension's vendored CDetour (jit/x86 based). SourceMod 1.12+
+      # dropped the bundled libudis86/asm CDetour in favour of safetyhook, so we
+      # no longer pull detours from SM.sm_root/public.
+      os.path.join('CDetour', 'detours.cpp'),
+      os.path.join('asm', 'asm.c'),
     ]
 
     SM.extensions += [builder.Add(binary)]
