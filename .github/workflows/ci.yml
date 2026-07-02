@@ -11,6 +11,7 @@ jobs:
       matrix:
         os: [ubuntu-22.04]
         sourcemod-version: [master]
+        metamod-version: [1.12-dev]
         include:
           - os: ubuntu-22.04
             target-archs: x86,x86_64
@@ -37,6 +38,14 @@ jobs:
           repository: alliedmodders/sourcemod
           ref: ${{ matrix.sourcemod-version }}
           path: sourcemod
+          submodules: recursive
+
+      - name: Checkout Metamod:Source
+        uses: actions/checkout@v7
+        with:
+          repository: alliedmodders/metamod-source
+          ref: ${{ matrix.metamod-version }}
+          path: metamod-source
           submodules: recursive
 
       - name: Checkout AMBuild
